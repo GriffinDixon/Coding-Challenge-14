@@ -13,26 +13,28 @@ async function fetchTickets() {
 
         const tickets = await response.json();
 
-        // Check for tickets
+        // Check if there are any tickets
         if (tickets.length === 0) {
             throw new Error('No unresolved tickets available.');
         }
 
-        // Display tickets
+        // Display tickets with specified details
         tickets.forEach(ticket => {
             const ticketDiv = document.createElement('div');
             ticketDiv.className = 'ticket';
             ticketDiv.innerHTML = `
-                <h3>${ticket.title}</h3>
-                <p>${ticket.body}</p>
+                <p><strong>Ticket ID:</strong> ${ticket.id}</p>
+                <p><strong>Customer Name:</strong> Customer ${ticket.userId}</p>
+                <p><strong>Issue Description:</strong> ${ticket.title}</p>
+                <p><strong>Details:</strong> ${ticket.body}</p>
             `;
             ticketContainer.appendChild(ticketDiv);
         });
     } catch (error) {
-        // Display error messages
+        // Display error message
         errorMessage.textContent = error.message;
     }
 }
 
-// fetch tickets when the page loads
+// Call the function to fetch tickets when the page loads
 fetchTickets();
