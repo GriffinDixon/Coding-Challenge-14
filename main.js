@@ -33,6 +33,9 @@ async function fetchTickets() {
     } catch (error) {
         // Display error message
         errorMessage.textContent = error.message;
+    } finally {
+        // Hide Loading Indicator
+        if (loadingIndicator) loadingIndicator.style.display = 'none';
     }
 }
 
